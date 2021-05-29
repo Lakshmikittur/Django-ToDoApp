@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 style="color:#126e82;">You are logged out</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a class="btn btn-outline-info" href="{% url 'login' %}">Login again</a>
+        </small>  
+    </div> 
+</div>
+{% endblock %}

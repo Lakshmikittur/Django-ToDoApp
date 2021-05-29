@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}{% csrf_token %}
+<br/>
+
+<div class="container">
+    <h1 style="color:#126e82;">{{user.username}}'s Tasks</h1>
+    <div class="border-top pt-3">
+      <nav class="navbar navbar-light bg-light">
+          <div class="container-fluid">
+            <form class="d-flex" method="GET">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+
+<br/>
+
+<ol class="list-group list-group-numbered">
+    {% for task in page_obj.object_list %}
+        {% if task.completed == True %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <strike><div class="fw-bold"><a style="color: #000000;" href="{% url 'tasks:taskdetail' task.id %}" >{{task.title}}</a></div></strike>
+            <br/>
+            <a class="btn btn-outline-info btn-sm" href="{% url 'tasks:updatetask' task.id %}" role="button">Update</a>
+            <a class="btn btn-outline-danger btn-sm" href="{% url 'tasks:deletetask' task.id %}" role="button">Delete</a>
+          </div>
+          <span class="badge bg-primary rounded-pill">{{task.date_modified}}</span>
+        </li>
+        {% else %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold"><a style="color: #000000;" href="{% url 'tasks:taskdetail' task.id %}" >{{task.title}}</a></div>
+              <br/>
+              <a class="btn btn-outline-info btn-sm" href="{% url 'tasks:updatetask' task.id %}" role="button">Update</a>
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'tasks:deletetask' task.id %}" role="button">Delete</a>
+            </div>
+            <span class="badge bg-primary rounded-pill">{{task.date_modified}}</span>
+          </li>
+        {% endif %}
+    {% endfor %}
+    </ol>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+{% endblock %}
+    
+    
+
+
+
+
+
+

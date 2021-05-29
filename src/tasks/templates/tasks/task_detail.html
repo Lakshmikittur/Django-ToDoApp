@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="color:#126e82;">Task Details</h1>
+        <div class="border-top pt-3">
+            {% if task.completed == True %}
+            <h3>{{task.title}} is already completed. Do you wish to delete it?</h3>
+            <a class="btn btn-outline-danger" href="{% url 'tasks:deletetask' task.id %}">Delete</a>
+            <a class="btn btn-outline-primary" href="{% url 'tasks:updatetask' task.id%}">Update</a>
+            <a class="btn btn-outline-info" href="../">Go Back</a>
+            {% else %}
+            <div>
+                <h3>ToDo:  {{task.title}}</h3>
+                <p class="text-break">{{task.content}}</p>
+                <p class="text-muted">Date Modified: {{task.date_modified}}</p>
+                <a class="btn btn-outline-danger" href="{% url 'tasks:deletetask' task.id %}">Delete</a>
+                <a class="btn btn-outline-primary" href="{% url 'tasks:updatetask' task.id%}">Update</a>
+                <a class="btn btn-outline-info" href="../">Go Back</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

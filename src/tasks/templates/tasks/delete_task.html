@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br/>
+<br/>
+<div class="container">
+    <h1 style="color:#126e82;">Delete Task</h1>
+    <div class="border-top pt-3">
+        <form action="", method="POST">{% csrf_token %}
+            <fieldset class="form-group">
+                <h4>Are you sure you want to delete {{task.title}} ? </h4>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes</button>
+                <a class="btn btn-outline-secondary" href="../">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
